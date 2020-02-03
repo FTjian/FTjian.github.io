@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.tzgj.science/"/>
-  <updated>2020-02-01T16:12:49.730Z</updated>
+  <updated>2020-02-03T04:23:56.834Z</updated>
   <id>http://blog.tzgj.science/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>网页ts视频段下载</title>
+    <link href="http://blog.tzgj.science/2020/02/%E7%BD%91%E9%A1%B5ts%E8%A7%86%E9%A2%91%E6%AE%B5%E4%B8%8B%E8%BD%BD/"/>
+    <id>http://blog.tzgj.science/2020/02/%E7%BD%91%E9%A1%B5ts%E8%A7%86%E9%A2%91%E6%AE%B5%E4%B8%8B%E8%BD%BD/</id>
+    <published>2020-02-03T04:11:29.000Z</published>
+    <updated>2020-02-03T04:23:56.834Z</updated>
+    
+    <content type="html"><![CDATA[<p>如何下载网页flash播放器里播放的mp4/flv视频？</p><a id="more"></a><p><strong>下载</strong><br>如果视频是在flash播放器里播放的，并且在嗅探器里找不到视频文件</p><p>首先把网页在edge里打开，并且顺序播放完毕</p><p>然后打开资源管理器，找到<br>c:\Users\用户名\AppData\Local\Packages\Microsoft.MicrosoftEdge_XXXX这样的文件夹并进入。</p><p>注意AppData是隐藏文件夹，可以先在地址栏输入c:\Users\用户名\AppData\Local\Packages然后在手动查找Edge的缓存文件夹。</p><p>之后在搜索工具里，选择时间为今天，类型为视频，等待几秒即可得到搜索结果。</p><blockquote><p>如果是一个完整的mp4文件我们直接就可以复制该文件，下载就完成了</p></blockquote><p>如果是一堆的ts后缀的文件，就需要先对ts文件进行合并。↓</p><p>查看下载的文件名称，是否是按照视频文件的播放先后顺序对视频文件进行名称命名的，比如文件名分别是FM1.ts，FM2.ts，FM3.ts，那么在待会儿操作时就会按照FM1.ts+FM2.ts+FM3.ts的顺序进行文件合并（一般下载时默认名称就是排好序的）。</p><p>不过文件在10个及10个以上时就要注意了，假如有12个文件，它会按照FM1 FM10 FM11 FM12 FM2 FM3……进行排序，这时就要加大命名数字的位数（比如FM01，FM02，……FM11，FM12），根据文件的个数以此类推。（前面塞0）</p><p>下面就可以对ts文件进行合并操作了，打开电脑的DOS界面（ctrl+r），输入以下指令</p><p>copy /b D:\FM*.ts D:\FM\new.ts  此处把前面的路径改为自己的ts文件堆所在的文件夹的路径，后面是生成文件的所在路径</p><p>运行！</p><p>执行过该命令后，打开后面的路径就能看到所有ts文件都合并成一个new.ts文件啦</p><p><strong>播放</strong></p><p>有些播放器软件可以直接播放MPEG2-TS流，比如：WinDVD 5.x，VLC Media Player，Elecard Player，QQ影音等等。</p><p>播放前，先将ts文件的后缀名改为mpg格式，修改了后缀名后，直接用播放器打开文件播放即可。</p><p>如果不幸你的播放器里不能打开ts，那么就需要转码工具了，个人推荐MediaCoder Pro进行无损转换</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;如何下载网页flash播放器里播放的mp4/flv视频？&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Technology" scheme="http://blog.tzgj.science/categories/Technology/"/>
+    
+    
+      <category term="网页" scheme="http://blog.tzgj.science/tags/%E7%BD%91%E9%A1%B5/"/>
+    
+      <category term="flash" scheme="http://blog.tzgj.science/tags/flash/"/>
+    
+  </entry>
   
   <entry>
     <title>IGN过去十年电影盘点</title>
@@ -68,8 +93,8 @@
   
   <entry>
     <title>中国各类科研基金项目中英文翻译名称</title>
-    <link href="http://blog.tzgj.science/2020/01/%E4%B8%AD%E5%9B%BD%E5%90%84%E7%B1%BB%E7%A7%91%E7%A0%94%E5%9F%BA%E9%87%91%E9%A1%B9%E7%9B%AE%E4%B8%AD%E8%8B%B1%E6%96%87%E7%BF%BB%E8%AF%91%E5%90%8D%E7%A7%B0/"/>
-    <id>http://blog.tzgj.science/2020/01/%E4%B8%AD%E5%9B%BD%E5%90%84%E7%B1%BB%E7%A7%91%E7%A0%94%E5%9F%BA%E9%87%91%E9%A1%B9%E7%9B%AE%E4%B8%AD%E8%8B%B1%E6%96%87%E7%BF%BB%E8%AF%91%E5%90%8D%E7%A7%B0/</id>
+    <link href="http://blog.tzgj.science/2020/01/%E4%B8%AD%E5%9B%BD%E5%90%84%E7%B1%BB%E7%A7%91%E7%A0%94%E5%9F%BA%E9%87%91%E9%A1%B9%E7%9B%AE%E4%B8%AD%E8%8B%B1%E6%96%87%E5%90%8D%E7%A7%B0/"/>
+    <id>http://blog.tzgj.science/2020/01/%E4%B8%AD%E5%9B%BD%E5%90%84%E7%B1%BB%E7%A7%91%E7%A0%94%E5%9F%BA%E9%87%91%E9%A1%B9%E7%9B%AE%E4%B8%AD%E8%8B%B1%E6%96%87%E5%90%8D%E7%A7%B0/</id>
     <published>2020-01-29T08:27:50.000Z</published>
     <updated>2020-01-29T09:03:53.818Z</updated>
     
