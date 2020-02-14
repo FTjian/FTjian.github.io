@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="vlog,技术,分享" />
+   
+  <meta name="description" content="科技杂谈" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    计算机图形学 |  土方二水
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="土方二水" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-计算机图形学" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  计算机图形学
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" class="article-date">
+  <time datetime="2020-02-12T02:23:42.000Z" itemprop="datePublished">2020-02-12</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Technology/">Technology</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">4.2k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">14分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p>常识的就不写了，看的是<a href="https://www.bilibili.com/video/av66548502" target="_blank" rel="noopener">https://www.bilibili.com/video/av66548502</a></p>
+<a id="more"></a>
+
+<h2 id="颜色模型"><a href="#颜色模型" class="headerlink" title="颜色模型"></a>颜色模型</h2><hr>
+<p>色彩是对不同波长的光的能量的感知<br>人眼能感知的的光（可见光），波长范围在380nm到760nm之间<br>“光”是由不同波长的电磁波按照某种能量分布混合叠加而成<br>谱分布：光在各个可见波长的分量的强度分布函数成为光的谱分布<br>不同的谱分布可能对应同一种颜色<br>RGB色彩空间在计算机图形学中的使用最为广泛，但是有一部分色彩无法表示成rgb光波的<strong>正线性组合</strong>，这是一个缺点<br>其它常用的色彩空间有CMY、HSV、CIE XYZ<br>CMY：不同于RGB的另外一组基本色彩，多用于印刷<br>    Cyan（青色） Magenta(品红) Yellow（黄色）；分别是RGB的补色（complements）<br><strong>CMY</strong>被称为减色系统，<strong>RGB</strong>被称为加色系统<br>    RGB 0,0,0为黑 1,1,1为白<br>    CMY 0,0,0为白 1,1,1为黑<br>HSV是一个圆锥形的色彩空间提供了一个直观的方法对色彩进行准确的选择，应用于图像处理、分形图像、光线追踪，更加用户友好<br>    Hue(色调）色相，描述了色彩的本征属性<br>    Saturation（饱和度）叫纯度，越低，色彩越白<br>    Value of brightness（亮度）亮度越低，色彩越黑<br>CIE XYZ可以表示所有可感知的色彩（RGB不能），是RGB的线性变换，应用于色彩科学的研究，与人类的感知系统密切相关<br>    有一个色度图（百度搜吧）</p>
+<h2 id="图像基本知识"><a href="#图像基本知识" class="headerlink" title="图像基本知识"></a>图像基本知识</h2><hr>
+<p>图像可以看成是一个二维离散函数f（x，y），定义域由像素（pixel）组成<br>f的取值为各个像素的色彩，对于灰度图像，f是单值函数</p>
+<p>图形学的基本目标是<strong>从虚拟的三维场景及相机的位置信息中，生成出一幅二维图像</strong><br>简单的模型可直接用其参数描述，复杂模型则需要用<strong>参数曲线和曲面</strong>或者更一般的<strong>网格模型</strong>来进行描述，网格模型之中又以<strong>三角网格</strong>最为常用</p>
+<p>三角网格是由一系列欧式空间的三维顶点一级连接这些顶点的若干三角面片组成<br>三角面片的<strong>法向量</strong>（normal）<br>    定义：这是垂直于该三角面片所在平面的非零向量，对于每个面片而言，其法向量都有两种可能的朝向，朝向决定了一个三角面片的正反面，对于连续可定向的三角网格整体而言，相邻的三角面片要法向量朝向一致<br>三角网格顶点的法向量可以通过其周围的所有三角面片的法向量通过加权叠加计算<br>每个顶点需要指定一个色彩属性<br>    基于色彩的绘制：模型表面的每点的色彩通过其所在的面片的顶点色彩插值得到<br>    基于光照的绘制：要制定一个光照环境（虚拟的）（计算光照对色彩的 影响是最大的问题）<br>线框——颜色——光照</p>
+<p>光照模型用于计算光的强度<br>    局部光照明（Local Lighting):关注物体直接受到光源影响所产生的光照效果<br>    全局光照明（Global Lighting）关注阴影效果和非局部光照明的效果（反射折射等等）</p>
+<p>光的传播遵循反射定律（百度搜吧）、折射定律（也是的）、能量守恒定律（+1）<br>光的度量：<br>    立体角（Solid Angle）横梁物体相对于某一视点P的视角大小，最大为4π，面积除以半径的平方，描述了从原点向一个球面区域张成的视野大小，是平面角在三维的自然推广。最大角在范围为整个球面时取到<br>    光通量（Luminous Flux）：单位时间内通过面元的光能量，记为dF，单位是瓦特<br>    发光强度（Radiance）：单位立体角内的光通量，记为I</p>
+<p>Phong光照模型：支持点光源和方向光源、是局部光照模型，把它分解为三个部分：漫反射光效果、镜面反射光效果、环境光效果<br>示意图（网上搜）：L是入射光，R是反射光，N是物体表面的法向量，V是视点方向，H是L和V夹角的角平分线方向<br>    漫反射光效果：传播是各向同性的，强度取决于入射光光强和法向的夹角<br>    镜面反射光效果：强度和物体表面光滑程度相关，反射指数越大，越集中<br>    环境光效果：和物体对环境光的反射系数有关<br>视觉方向的发光强度就是上面三者相加之和</p>
+<p>明暗处理：考虑到物体表面的几何细节往往不规则，为了减缓不舒服的色彩效果，因此明暗处理除了使用光照模型外还需要进行插值Gouraud：对色彩进行插值，首先计算所有模型顶点的色彩值，对模型上任何一点按照其所在的三角面片上顶点的色彩按重心插值结果赋予其色彩值<br>Phong：对法相进行插值，对点的法向量进行插值得到连续的法向量场，再用该法向量场逐点使用光照模型进行色彩的计算</p>
+<p>（第二章被略过了哭）</p>
+<p>图形变换：非常重要，通过变换可以简洁高效地设置和编辑三维场景、光照位置以及视点方向<br>变换是将空间中的一个点x映射成其他点x‘的函数，广泛应用于：Morphing,Deformation,viewing,Projection,Real-time shadows<br>简单变换：有不变、平移、旋转、均衡缩放，可以相互复合和嵌套，都是可逆的<br>常见的变换有：<br>    刚体变换：保持度量（长度角度大小），有不变、平移、旋转以及它们的复合<br>    相似变换：保持角度，包括不变、平移、旋转、均衡缩放以及它们的复合<br>    线性变换：包括不变、旋转、缩放（不一定要均衡缩放）对称，错切<br>    仿射变换：保持直线以及直线与直线的平行，包括线性变换、相似变换以及它们的复合<br>    投影变换：保持直线<br>齐次坐标的本质是用四维数组表示三维的点和向量，几何意义（百度搜）<br>法向量变换：曲面的（单位）法向量是曲面和曲面正交的（单位）向量，它们是曲面最为重要的几何性质之一。法向量是进行光照处理的必要输入，所有的光照模型都涉及到物体的法向量，只有知道了物体的法向量信息才能绘制出具有三维立体感的图像。<br>法向量在相似变换中也能变换。如何正确变换法向量？<br>    变换切平面（tangent plane），再通过切平面计算法向量而不是直接计算<br>法向量的变换矩阵是原变换矩阵的逆的转置</p>
+<p>视点和投影模式：眼睛将三维场景感知为二维图像，大脑再将二维图像重构回三维<br>投影的两个重要概念：<br>    视点变换：与相机位置及朝向相关<br>    投影模式：将3D变换成为2D的变换模式，常用的包括<br>        正交投影：视点在无穷远处的投影模式，缺乏立体透视效果<br>        透视投影：视点在有限距离处的投影模式，有立体透视效果<br>            相关知识：透视投影矩阵</p>
+<h2 id="双向反射分布函数（BRDF：Bidirectional-Reflectance-Distribution-Function）"><a href="#双向反射分布函数（BRDF：Bidirectional-Reflectance-Distribution-Function）" class="headerlink" title="双向反射分布函数（BRDF：Bidirectional Reflectance Distribution Function）"></a>双向反射分布函数（BRDF：Bidirectional Reflectance Distribution Function）</h2><hr>
+<p>描述的是物体表面对光的反射性质<br>定义和性质<br>模型<br>度量和评价</p>
+<p>光照可分为全局和局部两种<br>    局部光照：和物体直接被光源照射的情况相关<br>    全局光照：和物体被光源以外的其它地方来的光线照射的情况相关，包括其它物体反射和透射过来的光线</p>
+<p>预备知识：<br>    球面坐标（常识）<br>    立体角（上面有）<br>    投影面积：描述了一个物体表面的微小区域在某个视线方向上的可见面积（类似磁通面积）<br>    光能：是光子能量的总和，通常用Q表示，单位是焦耳（J)<br>    光通量（上面有）<br>    辉度：物体表面受光能的影响程度，是单位面积上的光通量<br>    发光强度（光强）：单位立体角上的光通量，用I表示，单位是W<br>    光亮度：表示物体表面沿某一方向的明亮程度，是单位投影面积和单位立体角上的光通量，使用符号I（L?)表示，单位是W/m²<br>    （辉度可以写成光亮度在入射光所形成的半球上的积分）</p>
+<p>BRDF的定义:描述的是物体表面将光能从任何一个入射方向反射到任何一个视点方向的反射特性，BRDF模型是绝大多数近代图形学算法中用于描述光反射现象的基本模型<br>是关于入射光方向和反射光方向的四维实值函数，它等于反射方向的光亮度和沿入射方向的入射光的辉度之比（网上找一个示意图）<br>BRDF的性质<br>    可逆性（Reciprocity)：源于光路可逆性交换入射光与反射光的角色并不会改变BRDF的值<br>    能量守恒性质：入射光的能量与出射光的总能量应该相等<br>    基于BRDF的渲染方程（Rendering Equation)：用以计算环境光照明下的反射光的光亮度，可以写成不同角度下入射光的光亮度乘以BRDF的积分</p>
+<p>为了方便和高效地使用BRDF数据，BRDF的数值模型具有如下三类：</p>
+<p>经验模型(Empirical Models)<br>    使用基于实验提出的公式对BRDF做快速估计，提供简介的公式以便于反射光线的快速计算，不考虑材质特性，仅仅提供一个反射光的粗糙近似。不一定满足物理定律，但因其简洁和高效性被广泛运用，是最基本的反射模型<br>        模型1：Lambertain，是最基本的反射模型，入射光被均匀地反射到各个方向，沿不同方向的BRDF是一个常数。它能很好地描述那些包含纯粹漫反射的物体（纸张等），不能表现出材质的镜面反射效果，因此对金属不友好，由于其简洁，所以它常常在其它的经验模型中作为分量的形式被包含<br>        模型2：Phong模型，在1的基础上添加了一项镜面反射项，以表达在反射角上的镜面反射效果（不满足可逆性），虽然缺乏物理解释且对某些金属材质仍不十分准确，但它仍是目前计算机图形学中被最为广泛使用的基于经验的反射模型，优势在于简洁高效，以及能同时表现漫反射和镜面反射的特征，它的大部分扩展都是为了实现进一步的加速<br>            Blinn-Phong模型引入入射方向和反射方向的角平分线，代替原先模型的点积从而简化运算<br>            快速Phoing绘制：思想是使用制表和插值的方法对指数项进行快速计算从而实现绘制的加速<br>            可逆的Phoong模型：通过去掉模型中镜面反射分量的分母项从而使得修改后的Phong模型能够满足可逆性<br>基于物理的模型(Physical-based Models)<br>    根据物体表面材料的集合以及光学属性建立反射方程从而计算BRDF，源于设计者的直觉和实践经验，而物理模型则建立在有关光的相互作用的科学知识上，通弄过包含材料的各种几何及光学性质来尽可能精确的近似现实世界中的材料<br>    通常建立在被称为表面粗糙度的细节几何结构上<br>    （粗糙度相关：从微观角度来看几乎没有完全光滑的表面，微观尺度的表面几何是通过一组微平面集合来建模的，粗糙度通过微平面法向的统计分布来表达）<br>    （菲涅尔项Fresnel Term，在实际应用中欧冠我们发现单向反射性在擦地角附近增大）<br>        Cook-Torrance模型，图形学中使用最早的BRDF物理模型，假设微平面是镜面反射的，微平面被假定是V形沟槽排列，结合了Lamberttian漫射项与微平面反射的镜面反射项。<br>        其它的物理模型<br>            各向同性：反射不受与给定表面法相夹角的约束，随机表面微结构<br>            各向异性：反射比随着与某个给定的表面法向之间的夹角而变化，图案的表面微结构，金属丝、绸缎、毛发<br>        Ward模型：因为Phone和Cook-Torrance都不能处理各向异性的效果，所以有这个模型。更一般的表面法相表达方式：通过椭圆体这种允许各向异性反射的形式来表达，由于没有考虑菲涅尔银子和几何衰减因子，更像是一种经验模型<br>        更多的模型：Oren-Nayar:将微平面当做Lambertian反射体而不是镜子、Poulin-Fournier：将微平面的法向表示为一组平行的圆柱体，同样处理各向异性的情况<br>数据表达的模型(Data-driven Moodels)<br>    将BRDF按照实测数据建立查找表以便于快速的查找和计算<br>    度量一个大的材料集合的BRDF，并将其记录为高维向量，利用降维方法从这些数据中计算一个低维流型<br>反射率（Albedo）：反射光的辉度和入射光的辉度之比</p>
+<p>三者对比：<br>经验模型：计算简单，可以产生视觉上可接受的结构哦<br>物理模型：参数具有物理意义，基于科学知识构建<br>数据驱动模型：灵活，对材料属性没有假设限定，很大的数据集，通常需要数据降维方法来压缩数据</p>
+<p>BRDF测量是为了对具有未知反射属性的材料进行建模，并生成具有高度真实感的结果，恢复BRDF和其它场景属性的过程有时也被称作逆渲染。<br>BRDF度量概述<br>    测量设备：由于BRDF是一个关于光线和视角的函数，其度量可通过对2D光照空间和2D视角空间进行采样获取<br>    度量设备：固定材料样本，移动光源和相机、固定光源，移动相机和样本、如果目标物体是由单一材料构成的已知凸几何体，可以固定光源和样本，移动相机<br>        Light Stage是最受关注的设备，同时获取BRDF<br>        Gonioreflectometer便宜但是也能用<br>    实际获取中的问题：相机参数矫正</p>
+<h2 id="光线跟踪"><a href="#光线跟踪" class="headerlink" title="光线跟踪"></a>光线跟踪</h2><hr>
+<p>第一个光线跟踪模型：Whitted</p>
+<p>光线跟踪思路和框架：将显示缓存区看成是由空间中的像素组成的矩形阵列，人眼透过这些像素看到场景中的物体。对于每个像素P计算其色彩值：计算由视点连接像素P中心的光线延长后所碰到的第一个物体的交点，使用局部光照模型计算交点处的颜色值，沿交点处的反射和折射方向对光线进行跟踪<br>光线跟踪的特征：通过光线跟踪可以很容易地表现出例如阴影、反射、折射等引人入胜的视觉效果、除了基本的几何形体，光线跟踪容易适用于更复杂的物体表示方法<br>光线跟踪使用递归实现</p>
+<p><strong>光线求交</strong><br>（这部分是在涉及太多公式，因此还是直接看P7里的吧）<br>光线的表示<br>光线和平面求交<br>光线和三角形求交<br>光线和多边形求交<br>光线和球面求交<br>光线和长方体求交</p>
+
+      
+      <!-- 打赏 -->
+      
+      <div id="reward-btn">
+        打赏
+      </div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.tzgj.science/2020/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" data-id="ck6m12eyg001zigv77e25b2q2"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E5%BD%A2/" rel="tag">图形</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/02/%E5%A5%87%E6%80%AA%E7%9A%84%E7%BC%A9%E5%86%99/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            奇怪的缩写
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/02/choose/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">choose</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: '',
+        app_id: '6W56gA6FW4R52q1e29v0Lrcx-gzGzoHsz',
+        app_key: '548zlUNPu2a3qMdMmQzbThmH',
+        path: window.location.pathname,
+        avatar: 'mm',
+        placeholder: '欢迎留言！匿名也可以留言！',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        落半思
+      </li>
+      <li>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+      <aside class="sidebar">
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="土方二水"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="https://space.bilibili.com/3105058" target="_blank" rel="noopener">B站</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      document.getElementById(e.target.innerText).scrollIntoView()
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+
+<script src="/js/ayer.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+</body>
+
+</html>
